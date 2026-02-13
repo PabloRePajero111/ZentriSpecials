@@ -1,0 +1,132 @@
+# ZentriSpecials Configuration
+# Folia-compatible plugin with multiple features
+
+# Clumps - XP Orb Merging (NEW)
+clumps:
+  enabled: true
+  merge-radius: 5.0          # radius in blocks to merge orbs
+  check-interval: 40          # ticks between merge checks
+  max-xp-per-orb: 10000      # maximum XP in a single merged orb
+  worlds:                     # worlds where this applies (empty = all)
+    - world
+    - world_nether
+
+# Compact Death Drops - Items don't scatter on death (NEW)
+compact-death-drops:
+  enabled: true
+  spread-radius: 0.3         # maximum scatter radius (blocks), 0 = same point
+  pickup-delay: 20            # ticks before items can be picked up (0 = immediate)
+  y-velocity: 0.1             # vertical velocity of dropped items
+  worlds:                     # worlds where this applies (empty = all)
+    - world
+    - world_nether
+
+# Item Cooldown by Region (WorldGuard)
+item-cooldown:
+  enabled: true
+  regions:
+    spawn:
+      ENDER_PEARL: 100        # 5 seconds (100 ticks)
+      CHORUS_FRUIT: 60        # 3 seconds
+    pvp:
+      GOLDEN_APPLE: 200       # 10 seconds
+      TOTEM_OF_UNDYING: 600   # 30 seconds
+
+# Max Uses by Region (WorldGuard)
+max-uses:
+  enabled: true
+  reset-on-region-leave: true
+  reset-interval: 3600        # seconds (0 = no time-based reset)
+  regions:
+    spawn:
+      ENDER_PEARL: 5
+      CHORUS_FRUIT: 10
+    events:
+      GOLDEN_APPLE: 3
+
+# Barrier Entity Kill by Region (WorldGuard)
+barrier-kill:
+  enabled: true
+  check-interval: 100         # ticks between checks
+  regions:
+    - spawn
+    - safe-zone
+  entity-types:               # entity types to kill (empty = all non-players)
+    - ZOMBIE
+    - SKELETON
+    - CREEPER
+    - SPIDER
+
+# Fly in Spawn and ProtectionStones
+fly:
+  enabled: true
+  spawn-region: spawn         # WorldGuard region name for spawn
+  enable-in-spawn: true
+  enable-in-protectionstones: true
+  anti-fall-damage: true      # prevent fall damage when fly is disabled
+  anti-fall-ticks: 60         # ticks of fall damage immunity after fly disabled
+
+# Disabled Items by Region (WorldGuard)
+disabled-items:
+  enabled: true
+  regions:
+    spawn:
+      items:
+        - FLINT_AND_STEEL
+        - TNT
+        - TNT_MINECART
+      message: "&cYou cannot use this item in spawn!"
+    safe-zone:
+      items:
+        - LAVA_BUCKET
+        - FIRE_CHARGE
+      message: "&cThis item is disabled in safe zones!"
+
+# Fix Commands
+fix-commands:
+  enabled: true
+  fix-hand:
+    enabled: true
+    cooldowns:
+      default: 300            # 5 minutes in seconds
+      vip: 180                # 3 minutes (permission: zentrispecials.fixhand.vip)
+      mvp: 60                 # 1 minute (permission: zentrispecials.fixhand.mvp)
+  fix-all:
+    enabled: true
+    cooldowns:
+      default: 600            # 10 minutes in seconds
+      vip: 300                # 5 minutes (permission: zentrispecials.fixall.vip)
+      mvp: 120                # 2 minutes (permission: zentrispecials.fixall.mvp)
+
+# Messages
+messages:
+  prefix: "&8[&bZentri&8] &7"
+  reload-success: "&aConfiguration reloaded successfully!"
+  no-permission: "&cYou don't have permission to do that!"
+  
+  clumps:
+    merged: ""  # empty = no message (background task)
+  
+  compact-death:
+    items-dropped: ""  # empty = no message
+  
+  cooldown:
+    active: "&cYou must wait &e{time} &cbefore using this item again!"
+  
+  max-uses:
+    limit-reached: "&cYou have reached the maximum uses ({max}) for this item in this region!"
+  
+  fix-hand:
+    success: "&aYour item has been repaired!"
+    no-item: "&cYou must be holding an item to repair!"
+    not-repairable: "&cThis item cannot be repaired!"
+    cooldown: "&cYou must wait &e{time} &cbefore using this command again!"
+  
+  fix-all:
+    success: "&aAll your items have been repaired! ({count} items)"
+    no-items: "&cYou have no items to repair!"
+    cooldown: "&cYou must wait &e{time} &cbefore using this command again!"
+  
+  fly:
+    enabled: "&aFlight enabled!"
+    disabled: "&cFlight disabled!"
