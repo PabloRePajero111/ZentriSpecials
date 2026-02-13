@@ -1,0 +1,44 @@
+name: ZentriSpecials
+version: ${version}
+main: dev.zentri.specials.ZentriSpecials
+api-version: '1.21'
+folia-supported: true
+authors: [Zentri]
+description: Custom plugin with multiple features and Folia support
+depend: [WorldGuard]
+softdepend: [ProtectionStones]
+
+commands:
+  fixhand:
+    description: Repair the item in your hand
+    permission: zentrispecials.fixhand
+    usage: /fixhand
+  fixall:
+    description: Repair all items in your inventory
+    permission: zentrispecials.fixall
+    usage: /fixall
+  zentrispecials:
+    description: Main plugin command
+    permission: zentrispecials.admin
+    usage: /zentrispecials <reload>
+    aliases: [zs]
+
+permissions:
+  zentrispecials.admin:
+    description: Access to admin commands
+    default: op
+  zentrispecials.reload:
+    description: Reload the plugin configuration
+    default: op
+  zentrispecials.fixhand:
+    description: Use the fixhand command
+    default: true
+  zentrispecials.fixall:
+    description: Use the fixall command
+    default: op
+  zentrispecials.fly.spawn:
+    description: Allow fly in spawn region
+    default: op
+  zentrispecials.fly.protectionstones:
+    description: Allow fly in own ProtectionStones regions
+    default: true
