@@ -117,15 +117,8 @@ public class ItemMaxUsesListener implements Listener {
         for (String region : previousRegions) {
             if (!currentRegions.contains(region)) {
                 // Player left this region
-                if (maxUsesManager.hasRegionMaxUses(region)) {
-                    // Check if any materials in this region have reset-on-leave enabled
-                    for (Material material : Material.values()) {
-                        MaxUsesManager.MaxUseConfig config = maxUsesManager.getMaxUseConfig(region, material);
-                        if (config != null && config.resetOnLeave) {
-                            maxUsesManager.resetRegionUsage(player, region);
-                            break; // Reset entire region, no need to check more materials
-                        }
-                    }
+                if (maxUsesManager.hasResetOnLeave(region)) {
+                    maxUsesManager.resetRegionUsage(player, region);
                 }
             }
         }

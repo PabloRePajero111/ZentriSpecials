@@ -110,8 +110,18 @@ public class BarrierEntityKillTask {
         com.sk89q.worldedit.math.BlockVector3 min = region.getMinimumPoint();
         com.sk89q.worldedit.math.BlockVector3 max = region.getMaximumPoint();
         
-        // Iterate through all entities in the region's bounding box
-        for (Entity entity : world.getEntities()) {
+        // Calculate center and size for getNearbyEntities
+        double centerX = (min.getX() + max.getX()) / 2.0;
+        double centerY = (min.getY() + max.getY()) / 2.0;
+        double centerZ = (min.getZ() + max.getZ()) / 2.0;
+        Location center = new Location(world, centerX, centerY, centerZ);
+        
+        double halfSizeX = (max.getX() - min.getX()) / 2.0 + 1;
+        double halfSizeY = (max.getY() - min.getY()) / 2.0 + 1;
+        double halfSizeZ = (max.getZ() - min.getZ()) / 2.0 + 1;
+        
+        // Get nearby entities within the region's bounding box
+        for (Entity entity : world.getNearbyEntities(center, halfSizeX, halfSizeY, halfSizeZ)) {
             // Skip players
             if (entity instanceof Player) {
                 continue;
@@ -124,7 +134,7 @@ public class BarrierEntityKillTask {
             
             Location entityLoc = entity.getLocation();
             
-            // Check if entity is within region bounds
+            // Double-check if entity is within region bounds (getNearbyEntities uses spherical bounds)
             if (entityLoc.getBlockX() < min.getX() || entityLoc.getBlockX() > max.getX() ||
                 entityLoc.getBlockY() < min.getY() || entityLoc.getBlockY() > max.getY() ||
                 entityLoc.getBlockZ() < min.getZ() || entityLoc.getBlockZ() > max.getZ()) {

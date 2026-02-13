@@ -170,6 +170,30 @@ public class MaxUsesManager {
     }
     
     /**
+     * Get all materials configured for a region.
+     *
+     * @param region The region name
+     * @return Map of materials to configs, or null if region not found
+     */
+    public Map<Material, MaxUseConfig> getRegionMaterials(String region) {
+        return regionMaxUses.get(region);
+    }
+    
+    /**
+     * Check if any material in a region has reset-on-leave enabled.
+     *
+     * @param region The region name
+     * @return True if any material has reset-on-leave
+     */
+    public boolean hasResetOnLeave(String region) {
+        Map<Material, MaxUseConfig> materials = regionMaxUses.get(region);
+        if (materials == null) {
+            return false;
+        }
+        return materials.values().stream().anyMatch(config -> config.resetOnLeave);
+    }
+    
+    /**
      * Clear all data.
      */
     public void clear() {
