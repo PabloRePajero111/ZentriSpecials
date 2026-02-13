@@ -1,0 +1,91 @@
+# ZentriSpecials Configuration
+
+# Global prefix for plugin messages
+prefix: "&8[&bZentri&8] &7"
+
+# Feature 1: Item Cooldowns by Region
+item-cooldowns:
+  enabled: true
+  regions:
+    arena:
+      ENDER_PEARL: 200  # 10 seconds (ticks)
+      GOLDEN_APPLE: 100
+    pvp-zone:
+      ENDER_PEARL: 400
+  messages:
+    cooldown-applied: "{prefix}&eItem cooldown applied: &b{time}s"
+
+# Feature 2: Max Uses of Items by Region
+item-max-uses:
+  enabled: true
+  regions:
+    arena:
+      ENDER_PEARL:
+        max-uses: 3
+        reset-on-leave: true
+        reset-time: 300  # seconds, 0 = no time reset
+      GOLDEN_APPLE:
+        max-uses: 5
+        reset-on-leave: false
+        reset-time: 600
+  messages:
+    max-uses-reached: "{prefix}&cYou have reached the max uses for {item} in this region!"
+    uses-remaining: "{prefix}&eUses remaining for {item}: &b{uses}/{max}"
+
+# Feature 3: Barrier Entity Kill
+barrier-entity-kill:
+  enabled: true
+  check-interval: 100  # ticks
+  regions:
+    - spawn
+    - lobby
+  excluded-entities:
+    - ARMOR_STAND
+    - ITEM_FRAME
+    - GLOW_ITEM_FRAME
+    - PAINTING
+
+# Feature 4: Fly in Spawn and ProtectionStones
+fly:
+  enabled: true
+  spawn-region: "spawn"  # WorldGuard spawn region name
+  permission: "zentrispecials.fly"
+  messages:
+    fly-enabled: "{prefix}&aFlight enabled!"
+    fly-disabled: "{prefix}&cFlight disabled!"
+    no-permission: "{prefix}&cYou don't have permission to fly here."
+
+# Feature 5: Disabled Items in Regions
+disabled-items:
+  enabled: true
+  regions:
+    spawn:
+      - ENDER_PEARL
+      - TNT
+      - LAVA_BUCKET
+      - FLINT_AND_STEEL
+    arena:
+      - ELYTRA
+      - FIREWORK_ROCKET
+  messages:
+    item-disabled: "{prefix}&cYou cannot use {item} in this region!"
+
+# Feature 6: Fix Commands
+fix:
+  enabled: true
+  permission: "zentrispecials.fix"
+  cooldowns:  # in seconds
+    "zentrispecials.fix.staff": 0
+    "zentrispecials.fix.mvp": 30
+    "zentrispecials.fix.vip": 60
+    "zentrispecials.fix.default": 120
+  messages:
+    repaired-hand: "{prefix}&aItem in hand repaired."
+    repaired-all: "{prefix}&aAll items repaired."
+    cooldown: "{prefix}&cYou must wait {time} seconds to use this."
+    no-item: "{prefix}&cYou don't have a repairable item in hand."
+    no-permission: "{prefix}&cYou don't have permission to use this."
+
+# Reload command
+reload:
+  message: "{prefix}&aConfiguration reloaded successfully!"

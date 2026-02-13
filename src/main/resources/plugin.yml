@@ -1,0 +1,45 @@
+name: ZentriSpecials
+version: ${version}
+main: dev.zentri.specials.ZentriSpecials
+api-version: "1.21"
+folia-supported: true
+depend: [WorldGuard, ProtectionStones]
+author: Zentri
+description: Advanced special features plugin for Minecraft servers
+
+commands:
+  fixhand:
+    description: Repair the item in your hand
+    permission: zentrispecials.fix
+    usage: /fixhand
+  fixall:
+    description: Repair all items in your inventory
+    permission: zentrispecials.fix
+    usage: /fixall
+  zentrispecials:
+    description: Main plugin command
+    aliases: [zs]
+    usage: /zentrispecials <reload>
+
+permissions:
+  zentrispecials.fix:
+    description: Allows using fix commands
+    default: false
+  zentrispecials.fix.staff:
+    description: Staff fix cooldown (0s)
+    default: op
+  zentrispecials.fix.mvp:
+    description: MVP fix cooldown (30s)
+    default: false
+  zentrispecials.fix.vip:
+    description: VIP fix cooldown (60s)
+    default: false
+  zentrispecials.fix.default:
+    description: Default fix cooldown (120s)
+    default: true
+  zentrispecials.fly:
+    description: Allows flying in spawn and owned protections
+    default: false
+  zentrispecials.reload:
+    description: Allows reloading the plugin configuration
+    default: op
